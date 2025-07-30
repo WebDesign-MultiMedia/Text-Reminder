@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./output.css" rel="stylesheet">
+    <title>Text Reminder</title>
+</head>
+<body class="bg-black">
+ <h1 class="text-red-300 text-center text-2xl pb-2">Text Reminder</h1>
+
+ <form id="textReminderForm" class="flex flex-col items-center text-white text-roght">
+    <label for="" >Date <br><input id="date" type="date" class="bg-white text-red-300 rounded-xl text-center" ></label>
+    <label for="">Time <br><input id="time" type="time" class="bg-white text-red-300 rounded-xl text-center"></label>
+    <label for="">Text Reminder <br><input id="textReminder" type="text" class="bg-white text-red-300 rounded-xl text-center"></label>
+    <label for="">Reason <br><textarea name="reason" id="reason" cols="30" placeholder="What is your reminder ?" class="bg-white text-black rounded-xl text-center placeholder:text-white"></textarea></label>
+    <button type="submit">Submit</button>
+</form>
+
+ <section>
+    <h2 class="text-red-300 text-center text-2xl pt-10 ">Reminders</h2>
+ </section>
+
+
+ <script src="/app.js"></script>
+</body>
+</html>
