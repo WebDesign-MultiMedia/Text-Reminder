@@ -8,14 +8,15 @@ function loadReminderForm() {
 
     reminderInfo.forEach((reminderForm, index) =>{
         const card = document.createElement('div');
-        card.className = 'bg-gray-300 rounded shadow-xl/60 text-center';
+        // card.className = 'text-white bg-green-200 rounded shadow-xl text-center';
+        card.className = 'text-white bg-green-200 rounded shadow-xl text-center';
 
         card.innerHTML = `
-            <p class="text-white text-left">Date: ${reminderForm.date}</p>
-            <p class="text-white text-left">Time: ${reminderForm.time}</p>
-            <p class="text-white text-left">Cell: ${reminderForm.textReminder}</p>
-            <p class="text-white flex flex-col">Reason: ${reminderForm.reasoning}</p>
-            <button onclick="deleteReminder(${index})" class="mt-2 mb-2 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Delete</button>
+            <p ><strong>Date:</strong> ${reminderForm.date}</p>
+            <p ><strong>Time:</strong> ${reminderForm.time}</p>
+            <p ><strong>Cell:</strong> ${reminderForm.textReminder}</p>
+            <p ><strong>Reason:</strong> ${reminderForm.reasoning}</p>
+            <button onclick="deleteReminder(${index})" class=" bg-red-400 rounded-md w-20 text-black ">Delete</button>
         `;
         reminderCard.appendChild(card);
     });
@@ -38,7 +39,7 @@ const reminderForm = {
  date : document.getElementById('date').value,
  time : document.getElementById('time').value,
  textReminder : document.getElementById('textReminder').value,
- reasoning : document.getElementById('reason').value
+ reasoning : document.getElementById('reason').value,
 };
 
 const inputs = document.querySelectorAll('input');
@@ -48,7 +49,7 @@ const btn =  document.getElementById('btn');
 // const head = document.getElementById('header');
 
 if(!reminderForm.date || !reminderForm.time || !reminderForm.textReminder || !reminderForm.reasoning){
-    // alert('ERRRRR')
+    alert('ERRRRR')
     inputs.forEach(input => {
         input.style.backgroundColor = 'lightcoral';
         input.style.color = 'white';
@@ -75,3 +76,5 @@ localStorage.setItem('reminderInfo', JSON.stringify(reminderInfo));
 form.reset();
 loadReminderForm();
 });
+
+document.addEventListener('DOMContentLoaded', loadReminderForm);
