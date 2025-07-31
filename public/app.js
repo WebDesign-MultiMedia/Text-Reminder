@@ -8,15 +8,13 @@ function loadReminderForm() {
 
     reminderInfo.forEach((reminderForm, index) =>{
         const card = document.createElement('div');
-        // card.className = 'text-white bg-green-200 rounded shadow-xl text-center';
-        card.className = 'text-white bg-green-200 rounded shadow-xl text-center';
-
+      card.className = "flex flex-col ml-80 rounded-md mr-80 m-5 shadow-xl/60 items-center";
         card.innerHTML = `
-            <p ><strong>Date:</strong> ${reminderForm.date}</p>
-            <p ><strong>Time:</strong> ${reminderForm.time}</p>
-            <p ><strong>Cell:</strong> ${reminderForm.textReminder}</p>
-            <p ><strong>Reason:</strong> ${reminderForm.reasoning}</p>
-            <button onclick="deleteReminder(${index})" class=" bg-red-400 rounded-md w-20 text-black ">Delete</button>
+            <p  class="bg-gray-500 w-40 pl-5 rounded-t-md text-s"><strong class="text-white">Date:</strong> ${reminderForm.date}</p>
+            <p class="bg-gray-500 w-40 text-left pl-5"><strong class="text-white">Time:</strong> ${reminderForm.time}</p>
+            <p class="bg-gray-500 w-40 pl-5"><strong class="text-white">Cell:</strong> ${reminderForm.textReminder}</p>
+            <p class="bg-gray-500 w-40 text-center  rounded-b-md"><strong>Reason:</strong> <br> ${reminderForm.reasoning}</p>
+            <button onclick="deleteReminder(${index})" class=" mt-3 border-2 border-red-600 rounded-md w-20 text-red-300 ">Delete</button>
         `;
         reminderCard.appendChild(card);
     });
