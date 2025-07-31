@@ -566,6 +566,10 @@ video {
   position: relative;
 }
 
+.bottom-2 {
+  bottom: 0.5rem;
+}
+
 .m-0 {
   margin: 0px;
 }
@@ -696,6 +700,14 @@ video {
 
 .hidden {
   display: none;
+}
+
+.h-2 {
+  height: 0.5rem;
+}
+
+.h-20 {
+  height: 5rem;
 }
 
 .w-2 {
@@ -831,6 +843,10 @@ video {
 
 .border-r {
   border-right-width: 1px;
+}
+
+.border-b {
+  border-bottom-width: 1px;
 }
 
 .border-red-600 {

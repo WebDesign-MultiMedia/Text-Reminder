@@ -1,11 +1,25 @@
 const form = document.getElementById('textReminderForm');
 const reminderCard = document.getElementById('reminderCards');
 
-// Helper to format date as MM/DD/YYYY
+//  Format date as MM/DD/YYYY
 function formatDate(inputDate) {
     if (!inputDate) return '';
     const [year, month, day] = inputDate.split('-');
     return `${month}/${day}/${year}`;
+}
+
+// Format Time as !2-Hour
+function formatTimeTo12Hour(timeStr) {
+    if(!timeStr) return '';
+    let [hour, minute] = timeStr.split(':');
+    hour = parseInt(hour);
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    hour = hour % 12;
+    if (hour === 0) {
+        hour = 12;
+    }
+            return `${hour}:${minute} ${ampm}`;
+
 }
 
 // Load reminders from localStorage and display them
@@ -20,7 +34,7 @@ function loadReminderForm() {
             <p class="w-40 pl-5 rounded-t-md text-s"><strong class="text-white text-xl">Date:</strong> ${reminderForm.date}</p>
             <p class="w-40 text-left pl-5"><strong class="text-white text-xl">Time:</strong> ${reminderForm.time}</p>
             <p class="w-40 pl-5"><strong class="text-white text-xl">Cell:</strong> ${reminderForm.textReminder}</p>
-            <p class="w-40 text-center rounded-b-md"><strong class="text-white text-2xl">Reason:</strong><br> ${reminderForm.reasoning}</p>
+            <p class="w-40 text-center rounded-b-md border-2 border-gray-300 mt-3 "><strong class="text-white text-2xl">Reason:</strong><br> ${reminderForm.reasoning}</p>
             <button onclick="deleteReminder(${index})" class="mt-3 mb-2 border-2 border-red-600 rounded-md w-20 text-red-300">Delete</button>
         `;
         reminderCard.appendChild(card);
@@ -41,10 +55,12 @@ form.addEventListener('submit', (e) => {
 
     const dateInput = document.getElementById('date').value;
     const formattedDate = formatDate(dateInput);
+    const rawTime = document.getElementById('time').value;
+    const formmattedTime = formatTimeTo12Hour(rawTime);
 
     const reminderForm = {
         date: formattedDate,
-        time: document.getElementById('time').value,
+        time: formmattedTime,
         textReminder: document.getElementById('textReminder').value,
         reasoning: document.getElementById('reason').value,
     };
