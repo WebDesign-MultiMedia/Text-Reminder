@@ -18,7 +18,7 @@ const btn =  document.getElementById('btn');
 // const head = document.getElementById('header');
 
 if(!reminderForm.date || reminderForm.time || !reminderForm.textReminder || !reminderForm.reasoning){
-    alert('ERRRRR')
+    // alert('ERRRRR')
     inputs.forEach(input => {
         input.style.backgroundColor = 'lightcoral';
         input.style.color = 'white';
