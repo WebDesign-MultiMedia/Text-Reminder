@@ -86,7 +86,7 @@ form.addEventListener('submit', (e) => {
         btn.style.border = '1px solid white';
         btn.style.color = 'white';
         return;
-    } else{
+     }else{
     alert('success')
 }
 
@@ -95,7 +95,7 @@ form.addEventListener('submit', (e) => {
     reminderInfo.push(reminderForm);
     localStorage.setItem('reminderInfo', JSON.stringify(reminderInfo));
 
-    form.reset();
+    location.reload();
     loadReminderForm();
 });
 
