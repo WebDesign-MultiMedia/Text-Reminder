@@ -64,6 +64,7 @@
         newID = counterSnapshot.val() + 1;
     }
 
+
     const inputs = document.querySelectorAll('input');
     const form = document.getElementById('textReminderForm');
     const reasonTextarea = document.querySelectorAll('textarea');
@@ -104,6 +105,10 @@
     location.reload();
  });
 
+ function deleteReminder() {
+    
+ }
+
     // Display Data
  function displayReminder() {
     const remindersCard = document.getElementById('reminderCards');
@@ -114,13 +119,15 @@
         snapshot.forEach(childSnapShot => {
             const reminder = childSnapShot.val();
             const reminderEl = document.createElement('div');
-            reminderEl.className = 'reminder rounded-xl text-green-300 flex flex-col items-center  border-2 pt-5 pb-5 w-56 border-white';
+            reminderEl.className = 'reminder rounded-xl border-4 border-indigo-200 border-t-indigo-500 border-b-transparent border-l-transparent';
             reminderEl.innerHTML = `
-                <p><strong class='text-white'>Date:</strong> ${reminder.date}</p>
-                <p class='mr-10'><strong class='text-white'>Time:</strong> ${reminder.time}</p>
-                <p class=''><strong class='text-white'>Cell:</strong> ${reminder.textReminder}</p>
-                <p class='text-center'><strong class='text-white'>Reason:</strong> <br> ${reminder.reasoning}</p>
-            `;
+            <div class='flex flex-row text-red-400 flex-wrap p-5 items-center >
+                <p class=''><strong class='text-white text-2xl'>Date:</strong> <p class='text-yellow-400 pl-10'>${reminder.date}</p></p>
+                <p class='mr-10'><strong class='text-white text-2xl'>Time:</strong> <p class='text-yellow-400 pl-12'>${reminder.time}</p></p>
+                <p class=''><strong class='text-white text-2xl'>Cell:</strong> <p class='text-yellow-400 pl-10'>${reminder.textReminder}</p></p>
+                <p class='text-center p-5'><strong class='text-white text-2xl'>Reason:</strong> <br> <p class='text-yellow-400 '>${reminder.reasoning}</p></p>
+            </div>
+                `;
             remindersCard.appendChild(reminderEl);
         });
     })
