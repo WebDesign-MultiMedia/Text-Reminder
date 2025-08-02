@@ -81,7 +81,12 @@
         showConfirmButton: false,
         icon: 'error',
         denyButtonText: 'OKay',
-        theme: 'dark'
+        theme: 'dark',
+        backdrop: `
+    rgba(9, 8, 9, 0.87)
+    left top
+    no-repeat
+  `
         })
 
         submitBtn.style.backgroundColor = 'transparent';
