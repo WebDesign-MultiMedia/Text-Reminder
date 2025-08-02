@@ -1,7 +1,7 @@
 
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-  import { getDatabase, set, get, ref, onValue, push } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+  import { getDatabase, set, get, ref, onValue, push, remove, update, child  } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -42,6 +42,8 @@
         return `${h}:${m} ${ampm}`;
     }
 
+    // Form validation, 
+
  document.getElementById('textReminderForm').addEventListener('submit', async function(e) {
     e.preventDefault();
         // Fomatted Date
@@ -56,13 +58,13 @@
     const phone = document.getElementById('textReminder').value;
     const reason = document.getElementById('reason').value;
      
-    // Get the current counter value
-    const counterRef = ref(db, 'reminderCounter');
-    let counterSnapshot = await get(counterRef);
-    let newID = 1;
-    if (counterSnapshot.exists()) {
-        newID = counterSnapshot.val() + 1;
-    }
+    // // Get the current counter value
+    // const counterRef = ref(db, 'reminderCounter');
+    // let counterSnapshot = await get(counterRef);
+    // let newID = 1;
+    // if (counterSnapshot.exists()) {
+    //     newID = counterSnapshot.val() + 1;
+    // }
 
 
     const inputs = document.querySelectorAll('input');
@@ -87,10 +89,9 @@
     }
     
 
-    const newReminderRef = ref(db, `reminderId/${newID}`);
+    const newReminderRef = ref(db, `date/${date}`);
 
    await set(newReminderRef, {
-        id:newID,
         date:formattedDate,
         time:formmattedTime,
         textReminder: phone,
@@ -100,39 +101,63 @@
     //   document.getElementById('reminderForm'.reset());  
     // });
 
-    await set(counterRef, newID);
     document.getElementById('reminderForm').reset();
     location.reload();
  });
 
- function deleteReminder() {
-    
- }
+
 
     // Display Data
  function displayReminder() {
     const remindersCard = document.getElementById('reminderCards');
-    const remindersRef = ref(db, 'reminderId');
+    const remindersRef = ref(db, 'date');
 
-    onValue(remindersRef, (snapshot) =>{
+    onValue(remindersRef, (snapshot) => {
         remindersCard.innerHTML = '';
         snapshot.forEach(childSnapShot => {
             const reminder = childSnapShot.val();
+            const reminderKey = childSnapShot.key; // <-- this is your Firebase key, e.g. the date string
             const reminderEl = document.createElement('div');
-            reminderEl.className = 'reminder rounded-xl border-4 border-indigo-200 border-t-indigo-500 border-b-transparent border-l-transparent';
+            reminderEl.className = 'reminder';
             reminderEl.innerHTML = `
-            <div class='flex flex-row text-red-400 flex-wrap p-5 items-center >
-                <p class=''><strong class='text-white text-2xl'>Date:</strong> <p class='text-yellow-400 pl-10'>${reminder.date}</p></p>
-                <p class='mr-10'><strong class='text-white text-2xl'>Time:</strong> <p class='text-yellow-400 pl-12'>${reminder.time}</p></p>
-                <p class=''><strong class='text-white text-2xl'>Cell:</strong> <p class='text-yellow-400 pl-10'>${reminder.textReminder}</p></p>
-                <p class='text-center p-5'><strong class='text-white text-2xl'>Reason:</strong> <br> <p class='text-yellow-400 '>${reminder.reasoning}</p></p>
-            </div>
-                `;
+                <div class='w-56 bg-gray-800 rounded-2xl text-center'>
+                    <div class='w-56 rounded-2xl bg-gray-600 text-white pb-3'>
+                        <p><strong class='text-white text-2xl underline underline-offset-4 '>Date:</strong> <p class='text-xl italic'>${reminder.date}</p></p>
+                        <p><strong class='text-white text-2xl underline underline-offset-4'>Time:</strong> <p class='text-xl italic'>${reminder.time}</p></p>
+                        <p><strong class='text-white text-2xl underline underline-offset-4'>Cell:</strong> <p class='text-xl italic'>${reminder.textReminder}</p></p>
+                        <p><strong class='text-white text-2xl underline underline-offset-4'>Reason:</strong> <p class='text-xl italic'>${reminder.reasoning}</p></p>
+                    </div>
+                    <i class="fa-duotone fa-regular fa-clipboard-check text-green-400 text-3xl p-3"></i>
+                    <i class="fa-duotone fa-regular fa-trash text-red-400 text-3xl p-3 deleteBtn" data-key="${reminderKey}"></i>
+                    <i class="fa-duotone fa-regular fa-pen-to-square text-yellow-400 text-3xl p-3"></i>
+                </div>
+            `;
             remindersCard.appendChild(reminderEl);
         });
-    })
- }
- displayReminder();
+
+        // Attach delete event listeners (after the reminders have rendered!)
+        const deleteBtns = document.querySelectorAll('.deleteBtn');
+        deleteBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const key = this.getAttribute('data-key');
+                deleteData(key);
+            });
+        });
+    });
+}
+displayReminder();
+
+ function deleteData(key) {
+    remove(ref(db, 'date/' + key))
+        .then(() => {
+            alert('Delete is Successful !!');
+        })
+        .catch((err) => {
+            alert('Unsuccessful');
+            console.log(err); 
+        });
+}
+
 
 //  function writeUserData(reminderId ,date, time, textReminder, reasoning) {
 //     set(ref(db, 'reminderId/' + reminderId),{
