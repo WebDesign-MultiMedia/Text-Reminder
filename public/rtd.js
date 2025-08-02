@@ -76,8 +76,9 @@
     if (!date || !time || !phone || !reason) {
 
         Swal.fire({
-        title: 'ERROR: Fill in red',
-        showDenyButton: true,
+        position: 'top-center',
+        title: 'Fill in red',
+        showDenyButton: false,
         showConfirmButton: false,
         icon: 'error',
         denyButtonText: 'OKay',
@@ -86,7 +87,8 @@
     rgba(9, 8, 9, 0.87)
     left top
     no-repeat
-  `
+  `,
+        timer: 1500
         })
 
         submitBtn.style.backgroundColor = 'transparent';
@@ -105,9 +107,24 @@
         Swal.fire({
   title: 'Successfu!',
   icon: 'success',
-  confirmButtonText: 'Okay'
+  confirmButtonText: 'Okay',
+  showConfirmButton: false,
+  theme: 'dark',
+    backdrop: `
+    rgba(9, 8, 9, 0.87)
+    left top
+    no-repeat
+  `,
+  timer: 1500
+  
 })
+
+    const reloadPage = setTimeout(reloadPg, 1500);
+
+    function reloadPg() {
+        location.reload();
     }
+}
     
 
     const newReminderRef = ref(db, `date/${date}`);
@@ -142,11 +159,11 @@
             reminderEl.className = 'reminder';
             reminderEl.innerHTML = `
                 <div class='w-56 bg-green-800 rounded-2xl text-center mb-10'>
-                    <div class='w-56 rounded-2xl text-white pb-3 pt-3'>
-                        <p class='relative text-left pl-5'><strong class='text-white text-xl underline underline-offset-4 '>Date:</strong> <span class='italic'>${reminder.date}</span></p>
-                        <p class='relative text-left pl-5'><strong class='text-white text-xl underline underline-offset-4'>Time:</strong> <span class='italic'>${reminder.time}</span></p>
-                        <p class='relative text-left pl-5'><strong class='text-white text-xl underline underline-offset-4'>Cell:</strong> <span class='italic'>${reminder.textReminder}</span></p>
-                        <p><strong class='text-white text-xl underline underline-offset-4'>Reason:</strong> <p class='text-xl italic'>${reminder.reasoning}</p></p>
+                    <div class='w-56 rounded-2xl pb-3 pt-3'>
+                        <p class='relative text-left pl-5'><strong class='text-white text-sm '>Date:</strong> <span class='italic text-yellow-400'>${reminder.date}</span></p>
+                        <p class='relative text-left pl-5'><strong class='text-white text-sm '>Time:</strong> <span class='italic text-yellow-400'>${reminder.time}</span></p>
+                        <p class='relative text-left pl-5'><strong class='text-white text-sm '>Cell:</strong> <span class='italic text-yellow-400'>${reminder.textReminder}</span></p>
+                        <p><strong class='text-white text-sm underline underline-offset-4'>Reason:</strong> <p class='text-lg italic text-yellow-400'>${reminder.reasoning}</p></p>
                     </div>
                     <p class='bg-gray-800'>
                     <i class="fa-duotone fa-regular fa-clipboard-check text-green-400 text-3xl p-3"></i>
@@ -173,10 +190,36 @@ displayReminder();
  function deleteData(key) {
     remove(ref(db, 'date/' + key))
         .then(() => {
-            alert('Delete is Successful !!');
+           
+        Swal.fire({
+        title: 'Successfullyy Deleted',
+        showDenyButton: true,
+        showConfirmButton: false,
+        icon: 'success',
+        denyButtonText: 'Delete',
+        theme: 'dark',
+        backdrop: `
+    rgba(9, 8, 9, 0.87)
+    left top
+    no-repeat
+  `
+        })
         })
         .catch((err) => {
-            alert('Unsuccessful');
+            
+        Swal.fire({
+        title: 'Unsuccesfull',
+        showDenyButton: true,
+        showConfirmButton: false,
+        icon: 'error',
+        denyButtonText: 'Okay',
+        theme: 'dark',
+        backdrop: `
+    rgba(9, 8, 9, 0.87)
+    left top
+    no-repeat
+  `
+        })
             console.log(err); 
         });
 }
