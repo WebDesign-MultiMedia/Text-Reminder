@@ -6,7 +6,12 @@ module.exports = {
     "./index.html"  
   ],
   theme: {
-    extend: {},
+    extend: {
+        fontFamily:{
+         headings: ["Mozilla Headline", "sans-serif"],
+         form: ["Playwrite HU", "cursive"],
+      }
+    },
   },
   plugins: [],
 }

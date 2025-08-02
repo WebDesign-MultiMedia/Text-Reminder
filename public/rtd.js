@@ -83,6 +83,7 @@
         icon: 'error',
         denyButtonText: 'OKay',
         theme: 'dark',
+        position: 'center',
         backdrop: `
     rgba(9, 8, 9, 0.87)
     left top
@@ -110,6 +111,7 @@
   confirmButtonText: 'Okay',
   showConfirmButton: false,
   theme: 'dark',
+    position: 'center',
     backdrop: `
     rgba(9, 8, 9, 0.87)
     left top
@@ -139,8 +141,8 @@
     //   document.getElementById('reminderForm'.reset());  
     // });
 
-    document.getElementById('reminderForm').reset();
-    location.reload();
+    // document.getElementById('reminderForm').reset();
+    // location.reload();
  });
 
 
@@ -155,25 +157,39 @@
         snapshot.forEach(childSnapShot => {
             const reminder = childSnapShot.val();
             const reminderKey = childSnapShot.key; // <-- this is your Firebase key, e.g. the date string
+            const completeKey = childSnapShot.key
             const reminderEl = document.createElement('div');
             reminderEl.className = 'reminder';
             reminderEl.innerHTML = `
                 <div class='w-56 bg-green-800 rounded-2xl text-center mb-10'>
-                    <div class='w-56 rounded-2xl pb-3 pt-3'>
-                        <p class='relative text-left pl-5'><strong class='text-white text-sm '>Date:</strong> <span class='italic text-yellow-400'>${reminder.date}</span></p>
-                        <p class='relative text-left pl-5'><strong class='text-white text-sm '>Time:</strong> <span class='italic text-yellow-400'>${reminder.time}</span></p>
-                        <p class='relative text-left pl-5'><strong class='text-white text-sm '>Cell:</strong> <span class='italic text-yellow-400'>${reminder.textReminder}</span></p>
-                        <p><strong class='text-white text-sm underline underline-offset-4'>Reason:</strong> <p class='text-lg italic text-yellow-400'>${reminder.reasoning}</p></p>
+                    <div class=' rounded-2xl pb-3 pt-3'>
+                        <p class='relative text-left pl-5'><strong class='text-white text-xs '>Date:</strong> <span class='italic text-yellow-400 text-xs'>${reminder.date}</span></p>
+                        <p class='relative text-left pl-5'><strong class='text-white text-xs '>Time:</strong> <span class='italic text-yellow-400 text-xs'>${reminder.time}</span></p>
+                        <p class='relative text-left pl-5'><strong class='text-white text-xs '>Cell:</strong> <span class='italic text-yellow-400 text-xs'>${reminder.textReminder}</span></p>
+                        <p><strong class='text-white text-xs underline underline-offset-4'>Reason:</strong> <p class='text-lg italic text-yellow-400 '>${reminder.reasoning}</p></p>
                     </div>
                     <p class='bg-gray-800'>
                     <i class="fa-duotone fa-regular fa-clipboard-check text-green-400 text-3xl p-3"></i>
                     <i class="fa-duotone fa-regular fa-trash text-red-400 text-3xl p-3 deleteBtn" data-key="${reminderKey}"></i>
-                    <i class="fa-duotone fa-regular fa-pen-to-square text-yellow-400 text-3xl p-3"></i>
+                    <i class="fa-duotone fa-regular fa-pen-to-square text-yellow-400 text-3xl p-3 updateBtn" data-key=${reminderKey}></i>
                     </p>
                 </div>
             `;
             remindersCard.appendChild(reminderEl);
         });
+            // Complete Reminder
+    const updateBtn = document.querySelectorAll('.updateBtn');
+    updateBtn.forEach((btn =>{
+        btn.addEventListener('click', ()=>{
+            const editMode = document.getElementById('editModal');
+            const closeEditMode = document.getElementById('closeEditModal');
+            editMode.style.display = 'flex';
+            editMode.style.flex = 'justify-center';
+            closeEditMode.addEventListener('click', ()=>{
+                editMode.style.display = 'none';
+            })
+        })
+    }))
 
         // Attach delete event listeners (after the reminders have rendered!)
         const deleteBtns = document.querySelectorAll('.deleteBtn');
@@ -223,6 +239,9 @@ displayReminder();
             console.log(err); 
         });
 }
+
+
+
 
 
 //  function writeUserData(reminderId ,date, time, textReminder, reasoning) {
