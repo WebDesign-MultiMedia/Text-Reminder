@@ -7,19 +7,22 @@
     <link href="./src/output.css" rel="stylesheet">
     <!-- Awsome Font -->
      <script src="https://kit.fontawesome.com/2b46095725.js" crossorigin="anonymous"></script>
+     <!-- Sweetalert2 -->
+     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.2/dist/sweetalert2.min.css
+" rel="stylesheet">
     <title>Text Reminder</title>
 </head>
 <body class="bg-black">
     <h1 class="text-red-300 text-center text-4xl rounded-xl pt-5 pb-5 mb-2" id="header">Text Reminder</h1>
 
  <form id="textReminderForm" class="flex flex-col items-center text-white text-center  p-2 rounded-xl">
-    <label for="" >Date/Time <br><input id="date" type="date" class="bg-green-300 text-black rounded-xl text-center w-25" >
-    <input id="time" type="time" class="bg-green-300 text-black rounded-xl text-center w-22"></label>
+    <label for="" >Date/Time <br><input id="date" type="date" class="bg-green-800 text-white  rounded-xl text-center w-25 italic">
+    <input id="time" type="time" class="bg-green-800 text-white rounded-xl text-center pl-2 w-22"></label>
     <!-- <label for="">Time <br><input id="time" type="time" class="bg-white text-red-300 rounded-xl text-center w-56"></label> -->
-    <label for="">Phone #<br><input id="textReminder" name="phone" placeholder="Ex: 3474905546" type="tel" pattern="[0-9]{10}" maxlength="10" class="w-56 bg-green-300 text-black rounded-xl text-center placeholder:text-black"></label>
-    <label for="">Reason <br><textarea name="reason" id="reason" cols="30" placeholder="What is your reminder ?" class="bg-green-300 text-black rounded-xl text-center placeholder:text-black"></textarea></label>
+    <label for="">Phone #<br><input id="textReminder" name="phone" placeholder="Ex: 3474905546" type="tel" pattern="[0-9]{10}" maxlength="10" class="w-56 bg-green-800  rounded-xl text-center placeholder:text-white italic"></label>
+    <label for="">Reason <br><textarea name="reason" id="reason" cols="30" placeholder="What is your reminder ?" class="bg-green-800 text-white rounded-xl text-center placeholder:text-white italic"></textarea></label>
     <!-- <label for="">Set Reminder: <br><input type="date" class="bg-green-300 text-black rounded-xl text-center"><input type="time" class="bg-green-300 text-black rounded-xl text-center"></label> -->
-    <button type="submit" id="btn" class="bg-yellow-300 text-black border-2 border-white mt-5 w-24 rounded-md text-xl">Submit</button>
+    <button type="submit" id="btn" class="bg-green-800 text-white  border-2 border-white mt-5 w-24 rounded-md text-xl">Submit</button>
 </form>
 
  <section >
@@ -33,5 +36,9 @@
 
  <!-- <script src="./public/app.js"></script> -->
  <script type="module" src="./public/rtd.js"></script>
+
+ <script src="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.22.2/dist/sweetalert2.all.min.js
+"></script>
 </body>
 </html>

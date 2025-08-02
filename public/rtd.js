@@ -1,9 +1,10 @@
-
-  // Import the functions you need from the SDKs you need
+ 
+ // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
   import { getDatabase, set, get, ref, onValue, push, remove, update, child  } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
+
 
   // Your web app's Firebase configuration
   const firebaseConfig = {
@@ -70,22 +71,37 @@
     const inputs = document.querySelectorAll('input');
     const form = document.getElementById('textReminderForm');
     const reasonTextarea = document.querySelectorAll('textarea');
+    let submitBtn = document.getElementById('btn')
 
     if (!date || !time || !phone || !reason) {
-        alert('Fill in red');
+
+        Swal.fire({
+        title: 'ERROR: Fill in red',
+        showDenyButton: true,
+        showConfirmButton: false,
+        icon: 'error',
+        denyButtonText: 'OKay',
+        theme: 'dark'
+        })
+
+        submitBtn.style.backgroundColor = 'transparent';
+        submitBtn.style.border = '2px solid lightcoral';
         inputs.forEach(input =>{
-             input.style.backgroundColor = 'lightcoral';
+             input.style.backgroundColor = 'transparent';
             input.style.color = 'white';
-            input.style.border = '1px solid white';
-            form.style.border = '2px solid red';
+            input.style.border = '2px solid lightcoral';
         })
           reasonTextarea.forEach(reasonTextareas => {
-            reasonTextareas.style.backgroundColor = 'lightcoral';
-            reasonTextareas.style.border = '1px solid white';
+            reasonTextareas.style.backgroundColor = 'transparent';
+            reasonTextareas.style.border = '2px solid lightcoral';
         });
             return;
     } else {
-        alert('It was a success !!!')
+        Swal.fire({
+  title: 'Successfu!',
+  icon: 'success',
+  confirmButtonText: 'Okay'
+})
     }
     
 
@@ -120,16 +136,18 @@
             const reminderEl = document.createElement('div');
             reminderEl.className = 'reminder';
             reminderEl.innerHTML = `
-                <div class='w-56 bg-gray-800 rounded-2xl text-center'>
-                    <div class='w-56 rounded-2xl bg-gray-600 text-white pb-3'>
-                        <p><strong class='text-white text-2xl underline underline-offset-4 '>Date:</strong> <p class='text-xl italic'>${reminder.date}</p></p>
-                        <p><strong class='text-white text-2xl underline underline-offset-4'>Time:</strong> <p class='text-xl italic'>${reminder.time}</p></p>
-                        <p><strong class='text-white text-2xl underline underline-offset-4'>Cell:</strong> <p class='text-xl italic'>${reminder.textReminder}</p></p>
-                        <p><strong class='text-white text-2xl underline underline-offset-4'>Reason:</strong> <p class='text-xl italic'>${reminder.reasoning}</p></p>
+                <div class='w-56 bg-green-800 rounded-2xl text-center mb-10'>
+                    <div class='w-56 rounded-2xl text-white pb-3 pt-3'>
+                        <p class='relative text-left pl-5'><strong class='text-white text-xl underline underline-offset-4 '>Date:</strong> <span class='italic'>${reminder.date}</span></p>
+                        <p class='relative text-left pl-5'><strong class='text-white text-xl underline underline-offset-4'>Time:</strong> <span class='italic'>${reminder.time}</span></p>
+                        <p class='relative text-left pl-5'><strong class='text-white text-xl underline underline-offset-4'>Cell:</strong> <span class='italic'>${reminder.textReminder}</span></p>
+                        <p><strong class='text-white text-xl underline underline-offset-4'>Reason:</strong> <p class='text-xl italic'>${reminder.reasoning}</p></p>
                     </div>
+                    <p class='bg-gray-800'>
                     <i class="fa-duotone fa-regular fa-clipboard-check text-green-400 text-3xl p-3"></i>
                     <i class="fa-duotone fa-regular fa-trash text-red-400 text-3xl p-3 deleteBtn" data-key="${reminderKey}"></i>
                     <i class="fa-duotone fa-regular fa-pen-to-square text-yellow-400 text-3xl p-3"></i>
+                    </p>
                 </div>
             `;
             remindersCard.appendChild(reminderEl);
