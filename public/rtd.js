@@ -160,12 +160,12 @@
             const reminderEl = document.createElement('div');
             reminderEl.className = 'reminder';
         reminderEl.innerHTML = `
-    <div class='w-56 bg-green-800 rounded-2xl text-center mb-10'>
+    <div class='w-56 bg-green-800 rounded-2xl text-center mb-20 '>
         <div class='rounded-2xl pb-3 pt-3'>
-            <p class='relative text-left pl-5'><strong class='text-yellow-300 '>Date:</strong> <span class='reminder-date text-xs text-white'>${reminder.date}</span></p>
-            <p class='relative text-left pl-5'><strong class='text-yellow-300'>Time:</strong> <span class='reminder-time text-xs text-white'>${reminder.time}</span></p>
-            <p class='relative text-left pl-5'><strong class='text-yellow-300'>Cell:</strong> <span class='reminder-phone text-xs text-white'>${reminder.textReminder}</span></p>
-            <p><strong class='text-yellow-300'>Reason:</strong><br><span class='reminder-reason text-xs text-white'>${reminder.reasoning}</span></p>
+            <p class='relative text-left pl-5'><strong class='text-yellow-300 text-sm '>Date:</strong> <span class='reminder-date text-xl text-white italic'>${reminder.date}</span></p>
+            <p class='relative text-left pl-5'><strong class='text-yellow-300 text-sm'>Time:</strong> <span class='reminder-time text-xl text-white italic'>${reminder.time}</span></p>
+            <p class='relative text-left pl-5'><strong class='text-yellow-300 text-sm'>Cell:</strong> <span class='reminder-phone text-xl text-white italic'>${reminder.textReminder}</span></p>
+            <p><strong class='text-yellow-300 text-sm'>Reason:</strong><br><span class='reminder-reason text-xl text-white italic'>${reminder.reasoning}</span></p>
         </div>
         <p class='bg-gray-800'>
             <i class="fa-duotone fa-regular fa-clipboard-check text-green-400 text-3xl p-3"></i>

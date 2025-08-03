@@ -11,13 +11,13 @@
      <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.2/dist/sweetalert2.min.css
 " rel="stylesheet">
     <!-- Google Fonts -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&family=Playwrite+HU:wght@100..400&display=swap" rel="stylesheet">
-    <title>Text Reminder</title>
+<link href="https://fonts.googleapis.com/css2?family=Metamorphous&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mozilla+Headline:wght@200..700&family=Playwrite+AU+QLD:wght@100..400&family=Playwrite+HU:wght@100..400&display=swap" rel="stylesheet">
+<title>Text Reminder</title>
 </head>
 <body class="bg-black">
-    <h1 class="text-red-300 text-center text-4xl rounded-xl pt-2 font-headings" id="header">Text Reminder</h1>
+    <h1 class="text-red-300 text-center text-3xl rounded-xl pt-4 font-form3" id="header">Text Reminder</h1>
 
     <!-- Form -->
  <form id="textReminderForm" class="flex flex-col items-center text-white text-center  p-2 rounded-xl ">
@@ -35,8 +35,8 @@
 </form>
 
  <section>
-    <h2 class="rounded-xl pt-5 pb-5  text-red-300 mt-5 text-center text-4xl font-headings">Reminders</h2>
-    <div id="reminderCards" class="flex flex-row overflow-x-auto space-x-4  ml-3 rounded-xl p-1 font-form">
+    <h2 class="rounded-xl pt-3 pb-5  text-red-300 mb-5 text-center text-3xl mt-1 font-form3">Reminders</h2>
+    <div id="reminderCards" class="flex flex-row overflow-x-auto space-x-4  ml-3 -mt-6 rounded-xl font-form1">
         <!-- Reminder Info Inserted here -->
          
     </div>
@@ -45,12 +45,12 @@
 <!-- Edit Modal -->
 <div id="editModal" class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-green-300 bg-opacity-50 hidden z-50">
   <div class="bg-white p-6 rounded-xl w-80">
-    <h2 class="text-xl font-bold mb-4 text-black">Edit Reminder</h2>
+    <h2 class="text-xl font-bold mb-96 text-black">Edit Reminder</h2>
     <form id="editForm">
       <input type="hidden" id="editKey">
       <label class="block text-black mb-1">Date:</label>
       <input type="date" id="editDate" class="w-full mb-2 p-2 border rounded"/>
-      <label class="block text-black mb-1">Time:</label>
+      <label class="block text-black mb-1">Time:</label> 
       <input type="time" id="editTime" class="w-full mb-2 p-2 border rounded"/>
       <label class="block text-black mb-1">Cell:</label>
       <input type="tel" id="editPhone" placeholder="Ex: 3474905546" pattern="[0-9]{10}" maxlength="10" ="w-full mb-2 p-2 border rounded"/>
