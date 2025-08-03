@@ -19,13 +19,17 @@
 <body class="bg-black">
     <h1 class="text-red-300 text-center text-4xl rounded-xl pt-2 font-headings" id="header">Text Reminder</h1>
 
+    <!-- Form -->
  <form id="textReminderForm" class="flex flex-col items-center text-white text-center  p-2 rounded-xl ">
-    <label for="" >Date/Time <br>
-    <input id="date" type="date" placeholder="MM/DD/YYYY" class="w-25 bg-green-800 text-white  rounded-xl text-center italic placeholder:text-white">
-    <input id="time" type="time" class="w-25 bg-green-800 text-white rounded-xl text-center pl-2"></label>
+    <label for="" >Date</label>
+    <input id="date" type="date" placeholder="MM/DD/YYYY" class="w-36 h-9 bg-green-800 text-white  rounded-xl text-center italic placeholder:text-white">
+    <label for="">Time</label>
+    <input id="time" type="time" class="w-36 h-9 bg-green-800 text-white rounded-xl text-center pl-2">
     <!-- <label for="">Time <br><input id="time" type="time" class="bg-white text-red-300 rounded-xl text-center w-56"></label> -->
-    <label for="">Phone #<br><input id="textReminder" name="phone" placeholder="Ex: 3474905546" type="tel" pattern="[0-9]{10}" maxlength="10" class="w-56 bg-green-800  rounded-xl text-center placeholder:text-white italic"></label>
-    <label for="">Reason <br><textarea name="reason" id="reason" cols="30" placeholder="What is your reminder ?" class="bg-green-800 text-white rounded-xl text-center placeholder:text-white italic"></textarea></label>
+    <label for="">Phone #</label>
+    <input id="textReminder" name="phone" placeholder="Ex: 3474905546" type="tel" pattern="[0-9]{10}" maxlength="10" class="w-36 h-9 bg-green-800  rounded-xl text-center placeholder:text-white italic">
+    <label for="">Reason </label>
+    <textarea name="reason" id="reason" cols="20" placeholder="What is your reminder ?" class="bg-green-800 text-white rounded-xl text-center placeholder:text-white italic"></textarea>
     <!-- <label for="">Set Reminder: <br><input type="date" class="bg-green-300 text-black rounded-xl text-center"><input type="time" class="bg-green-300 text-black rounded-xl text-center"></label> -->
     <button type="submit" id="btn" class="bg-green-800 text-white  border-2 border-white mt-5 w-24 rounded-md text-xl">Submit</button>
 </form>
@@ -49,7 +53,7 @@
       <label class="block text-black mb-1">Time:</label>
       <input type="time" id="editTime" class="w-full mb-2 p-2 border rounded"/>
       <label class="block text-black mb-1">Cell:</label>
-      <input type="text" id="editPhone" class="w-full mb-2 p-2 border rounded"/>
+      <input type="tel" id="editPhone" placeholder="Ex: 3474905546" pattern="[0-9]{10}" maxlength="10" ="w-full mb-2 p-2 border rounded"/>
       <label class="block text-black mb-1">Reason:</label>
       <textarea id="editReason" class="w-full mb-2 p-2 border rounded"></textarea>
       <div class="flex justify-end space-x-2">

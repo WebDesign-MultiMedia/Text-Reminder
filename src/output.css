@@ -798,6 +798,30 @@ video {
   height: 100%;
 }
 
+.h-1 {
+  height: 0.25rem;
+}
+
+.h-10 {
+  height: 2.5rem;
+}
+
+.h-5 {
+  height: 1.25rem;
+}
+
+.h-4 {
+  height: 1rem;
+}
+
+.h-7 {
+  height: 1.75rem;
+}
+
+.h-9 {
+  height: 2.25rem;
+}
+
 .w-0 {
   width: 0px;
 }
@@ -868,6 +892,10 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-52 {
+  width: 13rem;
 }
 
 .border-collapse {
@@ -1557,6 +1585,11 @@ video {
 .text-yellow-600 {
   --tw-text-opacity: 1;
   color: rgb(202 138 4 / var(--tw-text-opacity, 1));
+}
+
+.text-red-600 {
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity, 1));
 }
 
 .underline {

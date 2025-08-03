@@ -113,7 +113,7 @@
   theme: 'dark',
     position: 'center',
     backdrop: `
-    rgba(9, 8, 9, 0.87)
+    rgba(9, 8, 9)
     left top
     no-repeat
   `,
@@ -121,7 +121,7 @@
   
 })
 
-    const reloadPage = setTimeout(reloadPg, 1500);
+    const reloadPage = setTimeout(reloadPg, 1300);
 
     function reloadPg() {
         location.reload();
@@ -157,51 +157,102 @@
         snapshot.forEach(childSnapShot => {
             const reminder = childSnapShot.val();
             const reminderKey = childSnapShot.key; // <-- this is your Firebase key, e.g. the date string
-            const completeKey = childSnapShot.key
             const reminderEl = document.createElement('div');
             reminderEl.className = 'reminder';
-            reminderEl.innerHTML = `
-                <div class='w-56 bg-green-800 rounded-2xl text-center mb-10'>
-                    <div class=' rounded-2xl pb-3 pt-3'>
-                        <p class='relative text-left pl-5'><strong class='text-white text-xs '>Date:</strong> <span class='italic text-yellow-400 text-xs'>${reminder.date}</span></p>
-                        <p class='relative text-left pl-5'><strong class='text-white text-xs '>Time:</strong> <span class='italic text-yellow-400 text-xs'>${reminder.time}</span></p>
-                        <p class='relative text-left pl-5'><strong class='text-white text-xs '>Cell:</strong> <span class='italic text-yellow-400 text-xs'>${reminder.textReminder}</span></p>
-                        <p><strong class='text-white text-xs underline underline-offset-4'>Reason:</strong> <p class='text-lg italic text-yellow-400 '>${reminder.reasoning}</p></p>
-                    </div>
-                    <p class='bg-gray-800'>
-                    <i class="fa-duotone fa-regular fa-clipboard-check text-green-400 text-3xl p-3"></i>
-                    <i class="fa-duotone fa-regular fa-trash text-red-400 text-3xl p-3 deleteBtn" data-key="${reminderKey}"></i>
-                    <i class="fa-duotone fa-regular fa-pen-to-square text-yellow-400 text-3xl p-3 updateBtn" data-key=${reminderKey}></i>
-                    </p>
-                </div>
-            `;
+        reminderEl.innerHTML = `
+    <div class='w-56 bg-green-800 rounded-2xl text-center mb-10'>
+        <div class='rounded-2xl pb-3 pt-3'>
+            <p class='relative text-left pl-5'><strong class='text-yellow-300 '>Date:</strong> <span class='reminder-date text-xs text-white'>${reminder.date}</span></p>
+            <p class='relative text-left pl-5'><strong class='text-yellow-300'>Time:</strong> <span class='reminder-time text-xs text-white'>${reminder.time}</span></p>
+            <p class='relative text-left pl-5'><strong class='text-yellow-300'>Cell:</strong> <span class='reminder-phone text-xs text-white'>${reminder.textReminder}</span></p>
+            <p><strong class='text-yellow-300'>Reason:</strong><br><span class='reminder-reason text-xs text-white'>${reminder.reasoning}</span></p>
+        </div>
+        <p class='bg-gray-800'>
+            <i class="fa-duotone fa-regular fa-clipboard-check text-green-400 text-3xl p-3"></i>
+            <i class="fa-duotone fa-regular fa-trash text-red-400 text-3xl p-3 deleteBtn" data-key="${reminderKey}"></i>
+            <i class="fa-duotone fa-regular fa-pen-to-square text-yellow-400 text-3xl p-3 updateBtn" data-key="${reminderKey}"></i>
+        </p>
+    </div>`;
             remindersCard.appendChild(reminderEl);
         });
-            // Complete Reminder
-    const updateBtn = document.querySelectorAll('.updateBtn');
-    updateBtn.forEach((btn =>{
-        btn.addEventListener('click', ()=>{
-            const editMode = document.getElementById('editModal');
-            const closeEditMode = document.getElementById('closeEditModal');
-            editMode.style.display = 'flex';
-            editMode.style.flex = 'justify-center';
-            closeEditMode.addEventListener('click', ()=>{
-                editMode.style.display = 'none';
-            })
-        })
-    }))
+     
+document.querySelectorAll('.updateBtn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const key = this.getAttribute('data-key');
+        const card = this.closest('.reminder');
+        const date = card.querySelector('.reminder-date').innerText;
+        const time = card.querySelector('.reminder-time').innerText;
+        const phone = card.querySelector('.reminder-phone').innerText;
+        const reason = card.querySelector('.reminder-reason').innerText;
+        
+        document.getElementById('editKey').value = key;
+        document.getElementById('editDate').value = formatDateForInput(date);
+        document.getElementById('editTime').value = formatTimeForInput(time);
+        document.getElementById('editPhone').value = phone;
+        document.getElementById('editReason').value = reason;
+        document.getElementById('editModal').classList.remove('hidden');
+    });
+});
 
-        // Attach delete event listeners (after the reminders have rendered!)
-        const deleteBtns = document.querySelectorAll('.deleteBtn');
-        deleteBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                const key = this.getAttribute('data-key');
-                deleteData(key);
-            });
-        });
+// Delete Button
+document.querySelectorAll('.deleteBtn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const key = this.getAttribute('data-key');
+        deleteData(key);
+    });
+});
+
+function formatDateForInput(date) {
+    const [mm, dd, yyyy] = date.split('/');
+    return `${yyyy}-${mm.padStart(2, '0')}-${dd.padStart(2, '0')}`;
+}
+function formatTimeForInput(time) {
+    let [h, minampm] = time.split(':');
+    let [m, ampm] = [minampm.slice(0, 2), minampm.slice(3)];
+    h = parseInt(h);
+    if (ampm.toUpperCase() === 'PM' && h !== 12) h += 12;
+    if (ampm.toUpperCase() === 'AM' && h === 12) h = 0;
+    return `${String(h).padStart(2, '0')}:${m}`;
+}
+
+
     });
 }
 displayReminder();
+
+// Close Modal
+document.getElementById('closeEditModal').addEventListener('click', function() {
+    document.getElementById('editModal').classList.add('hidden');
+});
+
+// Submit Modal (update data)
+document.getElementById('editForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const key = document.getElementById('editKey').value;
+    const date = document.getElementById('editDate').value;
+    const time = document.getElementById('editTime').value;
+    const phone = document.getElementById('editPhone').value;
+    const reason = document.getElementById('editReason').value;
+
+    const formattedDate = formatDate(date);
+    const formattedTime = formatTimeTo12Hour(time);
+
+    await update(ref(db, 'date/' + key), {
+        date: formattedDate,
+        time: formattedTime,
+        textReminder: phone,
+        reasoning: reason
+    });
+
+    document.getElementById('editModal').classList.add('hidden');
+    Swal.fire({
+        title: 'Updated!',
+        icon: 'success',
+        timer: 1000,
+        showConfirmButton: false
+    });
+});
+
 
  function deleteData(key) {
     remove(ref(db, 'date/' + key))
@@ -239,6 +290,44 @@ displayReminder();
             console.log(err); 
         });
 }
+
+function updateData(key) {
+    update(ref(db, 'date/' + key))
+        .then(() => {
+           
+        Swal.fire({
+        title: 'Updated Successfullyy',
+        showDenyButton: false,
+        showConfirmButton: false,
+        icon: 'success',
+        theme: 'dark',
+        backdrop: `
+    rgba(9, 8, 9, 0.87)
+    left top
+    no-repeat
+  `
+        })
+        })
+        .catch((err) => {
+            
+        Swal.fire({
+        title: 'Data not saved',
+        showDenyButton: false,
+        showConfirmButton: false,
+        icon: 'error',
+        denyButtonText: 'Okay',
+        theme: 'dark',
+        backdrop: `
+    rgba(9, 8, 9, 0.87)
+    left top
+    no-repeat
+  `
+        })
+            console.log(err); 
+        });
+}
+
+    
 
 
 
