@@ -16,31 +16,41 @@
 <link href="https://fonts.googleapis.com/css2?family=Metamorphous&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mozilla+Headline:wght@200..700&family=Playwrite+AU+QLD:wght@100..400&family=Playwrite+HU:wght@100..400&display=swap" rel="stylesheet">
 <title>Text Reminder</title>
 </head>
-<body class="bg-black">
-    <h1 class="text-red-300 text-center text-3xl rounded-xl pt-4 font-form3" id="header">Text Reminder</h1>
+<body class="bg-black ">
 
+    <h1 class="text-gray-300 p-2 text-center text-2xl">Text Reminder</h1>
+
+    <form class="text-red-400 flex flex-col items-center pb-5">
+        <label for="" class="text-2xl">Date</label>
+        <input type="date" id="date" class="w-52 text-center rounded-xl border-2">
+        <label for="" class="text-2xl">Time</label>
+        <input type="Time" id="time" class="w-52 text-center rounded-xl border-2">
+        <label for="" class="text-2xl">Phone</label>
+        <input type="tel" id='textReminder' class="w-52 text-center rounded-xl border-2">
+        <label for="" class="text-center text-2xl">Reason ?</label>
+        <textarea name="" id="" cols="30" rows="5" class=" p-5 rounded-xl border-2 w-52 "></textarea>
+        <button type="submit"><i class="fa-duotone fa-regular fa-alarm-clock text-4xl mt-5 text-yellow-300"></i></button>
+    </form>
+
+    <!-- <h1 class="text-red-300 text-center text-3xl rounded-xl pt-4 font-form3" id="header">Text Reminder</h1> -->
     <!-- Form -->
- <form id="textReminderForm" class="flex flex-col items-center text-white text-center  p-2 rounded-xl ">
+ <!-- <form id="textReminderForm" class="flex flex-col items-center text-white text-center  p-2 rounded-xl ">
     <label for="" >Date</label>
     <input id="date" type="date" placeholder="MM/DD/YYYY" class="w-36 h-9 bg-green-800 text-white  rounded-xl text-center italic placeholder:text-white">
     <label for="">Time</label>
     <input id="time" type="time" class="w-36 h-9 bg-green-800 text-white rounded-xl text-center pl-2">
-    <!-- <label for="">Time <br><input id="time" type="time" class="bg-white text-red-300 rounded-xl text-center w-56"></label> -->
     <label for="">Phone #</label>
     <input id="textReminder" name="phone" placeholder="Ex: 3474905546" type="tel" pattern="[0-9]{10}" maxlength="10" class="w-36 h-9 bg-green-800  rounded-xl text-center placeholder:text-white italic">
     <label for="">Reason </label>
     <textarea name="reason" id="reason" cols="20" placeholder="What is your reminder ?" class="bg-green-800 text-white rounded-xl text-center placeholder:text-white italic"></textarea>
-    <!-- <label for="">Set Reminder: <br><input type="date" class="bg-green-300 text-black rounded-xl text-center"><input type="time" class="bg-green-300 text-black rounded-xl text-center"></label> -->
     <button type="submit" id="btn" class="bg-green-800 text-white  border-2 border-white mt-5 w-24 rounded-md text-xl">Submit</button>
 </form>
 
  <section>
     <h2 class="rounded-xl pt-3 pb-5  text-red-300 mb-5 text-center text-3xl mt-1 font-form3">Reminders</h2>
-    <div id="reminderCards" class="flex flex-row overflow-x-auto space-x-4  ml-3 -mt-6 rounded-xl font-form1">
-        <!-- Reminder Info Inserted here -->
-         
+    <div id="reminderCards" class="flex flex-row overflow-x-auto space-x-4  ml-3 -mt-6 rounded-xl font-form1">         
     </div>
- </section>
+ </section> -->
 
 <!-- Edit Modal -->
 <div id="editModal" class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-green-300 bg-opacity-50 hidden z-50">
@@ -66,6 +76,7 @@
 
  <!-- <script src="./public/app.js"></script> -->
  <script type="module" src="./public/rtd.js"></script>
+ <script type="module" src="./public/sms.js"></script>
 
  <script src="
 https://cdn.jsdelivr.net/npm/sweetalert2@11.22.2/dist/sweetalert2.all.min.js
